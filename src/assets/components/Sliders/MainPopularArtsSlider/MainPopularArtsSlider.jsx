@@ -12,6 +12,7 @@ import 'swiper/css/pagination'
 // import LikeAndShare from '@components/Blocks/LikeAndShare'
 import '@styles/components/Sliders/Base/PopularSlider.scss'
 import { useNavigate } from 'react-router-dom'
+import Image from 'next/image'
 import { Navigation, Pagination } from 'swiper/modules'
 import { getBaseUrl, getImageUrl } from '../../../../utils/helper'
 import ModalWindow from '../../Blocks/ModalWindow'
@@ -49,17 +50,19 @@ const Slide = ({ product, baseUrl, onOverviewClick }) => {
 			// onClick={() => onOverviewClick(product)}
 			onClick={() => handleProductClick(product.id)}
 		>
-			<div className="PopularSliderCardInnerWrapper">
-				<img
-					className="PopularSliderCardImg"
-					src={imageUrl}
-					alt={t('Світлина мистецтва')}
-					onError={(e) => {
-						e.target.onerror = null
-						e.target.src = '/Img/newsCardERROR.jpg'
-					}}
-				/>
-			</div>
+                        <div className="PopularSliderCardInnerWrapper">
+                                <Image
+                                        className="PopularSliderCardImg"
+                                        src={imageUrl}
+                                        alt={t('Світлина мистецтва')}
+                                        width={630}
+                                        height={330}
+                                        onError={(e) => {
+                                                e.target.onerror = null
+                                                e.target.src = '/Img/newsCardERROR.jpg'
+                                        }}
+                                />
+                        </div>
 			<div className="PopularSliderCardAbsoluteWrapper">
 				<div className="PopularSliderCardButtonWrapper">
 					<button

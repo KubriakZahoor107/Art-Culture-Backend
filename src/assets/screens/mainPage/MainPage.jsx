@@ -8,8 +8,13 @@ import MainExhibitions from '@components/Blocks/MainExhibitions.jsx'
 import MainMuseums from '@components/Blocks/MainMuseums.jsx'
 import MainNews from '@components/Blocks/MainNews.jsx'
 import MainPageBannerSlider from '@components/Sliders/MainPageBannerSlider/MainPageBannerSlider.jsx'
-import MainInstagramSlider from '@components/Sliders/MainInstagramSlider/MainInstagramSlider.jsx'
+import dynamic from 'next/dynamic'
 import MainPopularArtsSlider from '@components/Sliders/MainPopularArtsSlider/MainPopularArtsSlider.jsx'
+
+const MainInstagramSlider = dynamic(
+        () => import('@components/Sliders/MainInstagramSlider/MainInstagramSlider.jsx'),
+        { loading: () => <p>Loading...</p> }
+)
 function MainPage() {
 	const { t } = useTranslation()
 	const [isExpanded, setIsExpanded] = useState(false)
