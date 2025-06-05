@@ -10,7 +10,7 @@ import { useTranslation } from 'react-i18next'
 import { IconContext } from 'react-icons/lib'
 import { TiDelete } from 'react-icons/ti'
 import { useNavigate } from 'react-router-dom'
-import { useAuth } from '../../../Context/AuthContext'
+import { useSession } from 'next-auth/react'
 import API from '../../../utils/api'
 import { getImageUrl } from '../../../utils/helper.js'
 
@@ -48,9 +48,10 @@ function ExhibitionForm() {
 	const [loading, setLoading] = useState(false)
 	const [openDropdownAuthorId, setOpenDropdownAuthorId] = useState(null)
 
-	const navigate = useNavigate()
-	const { t } = useTranslation()
-	const { user } = useAuth()
+        const navigate = useNavigate()
+        const { t } = useTranslation()
+        const { data: session } = useSession()
+        const user = session?.user
 
 	const [isModalOpen, setIsModalOpen] = useState(false)
 	const [modalData, setModalData] = useState({
@@ -66,18 +67,10 @@ function ExhibitionForm() {
 		const fetchArtistsAndMuseums = async () => {
 			try {
 				setLoading(true)
-				const response = await axios.get('/api/users/creators', {
-					headers: {
-						Authorization: `Bearer ${localStorage.getItem('token')}`,
-					},
-				})
+                                const response = await axios.get('/api/users/creators')
 				console.log('Artists data:', response.data.creators)
 				setArtists(response.data.creators)
-				const museumsResponse = await axios.get('/api/users/museums', {
-					headers: {
-						Authorization: `Bearer ${localStorage.getItem('token')}`,
-					},
-				})
+                                const museumsResponse = await axios.get('/api/users/museums')
 				console.log('Mus data', museumsResponse.data.museums)
 				setMuseums(museumsResponse.data.museums)
 			} catch (error) {
@@ -425,12 +418,11 @@ function ExhibitionForm() {
 		}
 
 		try {
-			const response = await API.post('/exhibitions', submissionData, {
-				headers: {
-					'Content-Type': 'multipart/form-data',
-					Authorization: `Bearer ${localStorage.getItem('token')}`,
-				},
-			})
+                        const response = await API.post('/exhibitions', submissionData, {
+                                headers: {
+                                        'Content-Type': 'multipart/form-data',
+                                },
+                        })
 			console.log('Exhibition created:', response.data)
 			setServerMessage('Exhibition created successfully!')
 			// Redirect to the exhibition details page

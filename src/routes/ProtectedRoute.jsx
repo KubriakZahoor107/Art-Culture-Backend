@@ -2,10 +2,12 @@
 
 import React from 'react'
 import { Navigate } from 'react-router-dom'
-import { useAuth } from '../Context/AuthContext'
+import { useSession } from 'next-auth/react'
 
 const ProtectedRoute = ({ children, roles = [] }) => {
-	const { isLoggedIn, user } = useAuth()
+        const { data: session, status } = useSession()
+        const user = session?.user
+        const isLoggedIn = !!user && status === 'authenticated'
 
 	if (!isLoggedIn || !user) {
 		return <Navigate to='/login' replace />

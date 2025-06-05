@@ -9,12 +9,15 @@ import DOMPurify from 'dompurify' // Import DOMPurify if needed
 import { useCallback, useEffect, useState } from 'react'
 import { useTranslation } from 'react-i18next'
 import { useNavigate } from 'react-router-dom'
-import { useAuth } from '../../../Context/AuthContext'
+import { useSession } from 'next-auth/react'
 import API from '../../../utils/api.js'
 import { getUserRole } from '../../../utils/constants.jsx'
 import styles from '/src/styles/components/UserProfile/userProfile.module.scss'
 const UserProfile = () => {
-	const { user, updateUser, loading, error } = useAuth() // Access user and logout from context
+        const { data: session, status, update } = useSession()
+        const user = session?.user
+        const loading = status === 'loading'
+        const error = null
 	const { isMuseum, isExhibition } = getUserRole()
 	const [email, setEmail] = useState('')
 	const [regDate, setRegDate] = useState('')
@@ -71,22 +74,24 @@ const UserProfile = () => {
 		setServerMessage('')
 	}
 
-	const handleAddressSelect = useCallback(
-		({ country, state, city, road, house_number, postcode, lat, lon }) => {
-			updateUser((prev) => ({
-				...prev,
-				country,
-				state,
-				city,
-				street: road,
-				house_number,
-				postcode,
-				lat,
-				lon,
-			}))
-		},
-		[],
-	)
+        const handleAddressSelect = useCallback(
+                ({ country, state, city, road, house_number, postcode, lat, lon }) => {
+                        update({
+                                user: {
+                                        ...user,
+                                        country,
+                                        state,
+                                        city,
+                                        street: road,
+                                        house_number,
+                                        postcode,
+                                        lat,
+                                        lon,
+                                },
+                        })
+                },
+                [user, update],
+        )
 
 	const handleUpdateProfile = async (e) => {
 		e.preventDefault()
@@ -163,7 +168,7 @@ const UserProfile = () => {
 				const { user: updatedUserProfile, message } = response.data
 				setServerMessage(t(message))
 				setEditMode(false)
-				updateUser(updatedUserProfile)
+                                update({ user: updatedUserProfile })
 				closeModal() // Закрываем модальное окно после успешного обновления
 			}
 		} catch (error) {

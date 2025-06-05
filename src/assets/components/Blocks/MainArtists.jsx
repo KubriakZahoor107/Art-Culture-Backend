@@ -2,7 +2,7 @@ import axios from 'axios'
 import { useEffect, useState } from 'react'
 import { useTranslation } from 'react-i18next'
 import { useNavigate } from 'react-router-dom'
-import { useAuth } from '../../../Context/AuthContext'
+import { useSession } from 'next-auth/react'
 import { getFormattedDate, getImageUrl } from '../../../utils/helper'
 import TranslatedContent from './TranslatedContent'
 import styles from '/src/styles/components/Blocks/MainNews.module.scss' // Assuming you have a CSS module for styling
@@ -11,9 +11,10 @@ function MainArtists() {
 	const { t } = useTranslation()
 	const [creators, setCreators] = useState([])
 	const navigate = useNavigate()
-	const [regDate, setRegDate] = useState('')
-	const [regTime, setRegTime] = useState('')
-	const { user } = useAuth()
+        const [regDate, setRegDate] = useState('')
+        const [regTime, setRegTime] = useState('')
+        const { data: session } = useSession()
+        const user = session?.user
 	const [visibleCreatorsCount, setVisibleCreatorsCount] = useState(
 		getPostsCount(window.innerWidth),
 	)

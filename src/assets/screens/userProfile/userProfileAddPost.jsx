@@ -7,14 +7,15 @@ import TextEditor from '@components/Blocks/TextEditor'
 import { useState } from 'react'
 import { useTranslation } from 'react-i18next'
 import { useNavigate } from 'react-router-dom'
-import { useAuth } from '../../../Context/AuthContext.jsx'
+import { useSession } from 'next-auth/react'
 import API from '../../../utils/api.js'
 import styles from '/src/styles/components/UserProfile/userProfileAddPost.module.scss'
 
 function UserProfileAddPost() {
 	const { t } = useTranslation()
-	const navigate = useNavigate()
-	const { user } = useAuth()
+        const navigate = useNavigate()
+        const { data: session } = useSession()
+        const user = session?.user
 
 	const [formData, setFormData] = useState({
 		title_en: '',
@@ -48,12 +49,6 @@ function UserProfileAddPost() {
 			return
 		}
 
-		const token = localStorage.getItem('token')
-		if (!token) {
-			setErrors(t('Користувач не авторізован'))
-			navigate('/login')
-			return
-		}
 
 		try {
 			const postData = new FormData()

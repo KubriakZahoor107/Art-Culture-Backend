@@ -3,8 +3,8 @@ import styles from '@styles/components/VerificationPage/LoginPage.module.scss'
 import { useState } from 'react'
 import { useTranslation } from 'react-i18next'
 import { useNavigate } from 'react-router-dom'
-import { useAuth } from '../../../Context/AuthContext.jsx'
-import API from '../../../utils/api.js'
+import { signIn, getSession } from 'next-auth/react'
+
 
 const Login = () => {
 	const { t } = useTranslation()
@@ -12,9 +12,8 @@ const Login = () => {
 		email: '',
 		password: '',
 	}) // Descriptive names
-	const [serverMessage, setServerMessage] = useState('')
-	const navigate = useNavigate()
-	const { login } = useAuth() // Access login function from context
+        const [serverMessage, setServerMessage] = useState('')
+        const navigate = useNavigate()
 	const [passwordVisible, setPasswordVisible] = useState(false)
 
 	const textEditorOnChange = ({ name, value }) => {
@@ -25,31 +24,26 @@ const Login = () => {
 		e.preventDefault()
 		setServerMessage('')
 
-		try {
-			const response = await API.post(
-				'/auth/login',
-				{
-					email: loginDetails.email,
-					password: loginDetails.password,
-				},
-				console.log('loginDetails.email, loginDetails.password'),
-			)
+                try {
+                        const res = await signIn('credentials', {
+                                redirect: false,
+                                email: loginDetails.email,
+                                password: loginDetails.password,
+                        })
 
-			if (response.status === 200) {
-				const { token, user } = response.data // Assuming API returns user data
-				login(user, token) // Update AuthContext
-				if (user.role === 'ADMIN') {
-					navigate('/admin/dashboard') // Redirect to admin dashboard
-				} else navigate('/profile') // Redirect to profile
-				console.log('token', token)
-			}
-		} catch (error) {
-			if (error.response && error.response.data) {
-				setServerMessage(error.response.data.error || 'Login Failed')
-			} else {
-				setServerMessage('An error occurred during login.')
-			}
-		}
+                        if (res?.error) {
+                                setServerMessage(res.error)
+                        } else {
+                                const session = await getSession()
+                                if (session?.user?.role === 'ADMIN') {
+                                        navigate('/admin/dashboard')
+                                } else {
+                                        navigate('/profile')
+                                }
+                        }
+                } catch (error) {
+                        setServerMessage('An error occurred during login.')
+                }
 	}
 
 	const handleSignUPLinkClick = () => {

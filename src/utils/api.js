@@ -1,6 +1,7 @@
 // src/utils/api.js
 
 import axios from 'axios'
+import { getSession } from 'next-auth/react'
 // Determine the host in both browser and server environments
 const host =
   typeof window !== 'undefined'
@@ -20,13 +21,9 @@ const API = axios.create({
 
 // Add a request interceptor to include the token in headers
 API.interceptors.request.use(
-        config => {
-                let token
-                if (typeof window !== 'undefined') {
-                        token = localStorage.getItem('token')
-                } else {
-                        token = process.env.TOKEN
-                }
+        async config => {
+                const session = await getSession()
+                const token = session?.accessToken || process.env.TOKEN
                 if (token) {
                         config.headers.Authorization = `Bearer ${token}`
                 }

@@ -1,6 +1,7 @@
-import { useAuth } from '../Context/AuthContext'
+import { useSession } from 'next-auth/react'
 export const getUserRole = () => {
-	const { user } = useAuth()
+        const { data: session } = useSession()
+        const user = session?.user
 	return {
 		isUser: user && user.role === 'USER',
 		isEditor: user && user.role === 'EDITOR',

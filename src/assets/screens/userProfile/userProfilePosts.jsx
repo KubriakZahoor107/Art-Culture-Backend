@@ -9,14 +9,15 @@ import TranslatedContent from '@components/Blocks/TranslatedContent.jsx'
 import { useEffect, useState } from 'react'
 import { useTranslation } from 'react-i18next'
 import { useNavigate } from 'react-router-dom'
-import { useAuth } from '../../../Context/AuthContext.jsx'
+import { useSession } from 'next-auth/react'
 import API from '../../../utils/api.js'
 import styles from '/src/styles/components/UserProfile/userProfilePosts.module.scss'
 
 function UserProfilePosts() {
 	const { t, i18n } = useTranslation()
-	const navigate = useNavigate()
-	const { user } = useAuth()
+        const navigate = useNavigate()
+        const { data: session } = useSession()
+        const user = session?.user
 	const [currentLanguage, setCurrentLanguage] = useState(i18n.language)
 
 	const [posts, setPosts] = useState([]) // User's posts
@@ -123,12 +124,11 @@ function UserProfilePosts() {
 			const response = await API.put(
 				`/posts/${editingPost.id}`,
 				postData,
-				{
-					headers: {
-						'Content-Type': 'multipart/form-data',
-						Authorization: `Bearer ${localStorage.getItem('token')}`,
-					},
-				},
+                                {
+                                        headers: {
+                                                'Content-Type': 'multipart/form-data',
+                                        },
+                                },
 			)
 
 			if (response.status === 200) {

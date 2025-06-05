@@ -5,7 +5,7 @@ import styles from '@styles/components/VerificationPage/LoginPage.module.scss'
 import { useCallback, useState } from 'react'
 import { useTranslation } from 'react-i18next'
 import { useNavigate } from 'react-router-dom'
-import { useAuth } from '../../../Context/AuthContext.jsx'
+import { signIn } from 'next-auth/react'
 import API from '../../../utils/api.js'
 import MuseumAddressSearch from '../Blocks/MuseumAddressSearch.jsx'
 
@@ -28,8 +28,7 @@ const SignUp = () => {
 		lat: '',
 		lon: '',
 	})
-	const [serverMessage, setServerMessage] = useState('')
-	const { login } = useAuth() // Utilize login from AuthContext
+        const [serverMessage, setServerMessage] = useState('')
 	const navigate = useNavigate()
 	const [passwordVisible, setPasswordVisible] = useState(false)
 	const isMuseum = signUpDetails.role === 'MUSEUM'
@@ -117,11 +116,14 @@ const SignUp = () => {
 				console.log('signUpDetails', signUpDetails),
 			)
 
-			if (response.status === 201) {
-				const { token, user } = response.data // Assuming API returns user data
-				login(user, token) // Update AuthContext
-				navigate('/profile') // Redirect to profile
-			}
+                        if (response.status === 201) {
+                                await signIn('credentials', {
+                                        redirect: false,
+                                        email: signUpDetails.email,
+                                        password: signUpDetails.password,
+                                })
+                                navigate('/profile')
+                        }
 		} catch (error) {
 			if (error.response && error.response.data) {
 				setServerMessage(

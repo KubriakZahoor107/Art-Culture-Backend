@@ -1,13 +1,12 @@
 import styles from '@styles/components/Blocks/Sidebar.module.scss'
 import { useTranslation } from 'react-i18next'
 import { useNavigate } from 'react-router-dom'
-import { useAuth } from '../../../Context/AuthContext.jsx'
+import { signOut } from 'next-auth/react'
 import { getUserRole } from '../../../utils/constants'
 
 function Sidebar() {
-	const { t } = useTranslation()
-	const navigate = useNavigate()
-	const { logout } = useAuth()
+        const { t } = useTranslation()
+        const navigate = useNavigate()
 	const { isAdmin, isAuthor, isCreator, isEditor, isExhibition, isMuseum } =
 		getUserRole()
 
@@ -39,10 +38,9 @@ function Sidebar() {
 		navigate('/Exhibitions')
 	}
 
-	const handleLogout = () => {
-		logout()
-		navigate('/login')
-	}
+        const handleLogout = () => {
+                signOut({ callbackUrl: '/login' })
+        }
 
 	return (
 		<div className={styles.profileActions}>
