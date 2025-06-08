@@ -87,6 +87,30 @@ News pages are pre-rendered at build time but regenerate periodically. The
 instructs Next.js to refresh the static content every 60 seconds.
 
 For information on obtaining sample SQL dumps see [docs/SAMPLE_DATA.md](docs/SAMPLE_DATA.md).
+## Deploying to GCP
+
+The `.env.example` file lists all variables needed in production. When creating a Cloud Run service, add these keys under **Environment Variables** or load them from Secret Manager. Set `NEXT_PUBLIC_HOST` to `art.playukraine.com` because the frontend is served from `https://art.playukraine.com` and all API routes live under `/api` on the same host.
+
+### Build and push the image
+```bash
+docker build -t REGION-docker.pkg.dev/PROJECT_ID/art-culture/app:latest .
+docker push REGION-docker.pkg.dev/PROJECT_ID/art-culture/app:latest
+```
+You can then deploy via Cloud Run or the Google Cloud Console. The command
+below assumes the image was pushed to Artifact Registry:
+```bash
+gcloud run deploy art-culture \
+  --image REGION-docker.pkg.dev/PROJECT_ID/art-culture/app:latest \
+  --region REGION \
+  --platform managed \
+  --set-env-vars $(grep -v '^#' .env.example | xargs)
+```
+Alternatively you can deploy directly from source without pushing an image:
+```bash
+gcloud run deploy --source . \
+  --region REGION \
+  --set-env-vars $(grep -v '^#' .env.example | xargs)
+```
 
 ## License
 
