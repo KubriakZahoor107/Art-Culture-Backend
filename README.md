@@ -24,14 +24,8 @@ Tests rely on an up-to-date `package-lock.json`.
 
 ## Environment Variables
 
-Copy `.env.example` to `.env` and update the values as needed.
-
-- `DATABASE_URL` – connection string for PostgreSQL
-- `REDIS_URL` or `UPSTASH_REDIS_REST_URL`/`UPSTASH_REDIS_REST_TOKEN`
-- `SHOPIFY_API_KEY` and `SHOPIFY_API_SECRET`
-- `NEXTAUTH_SECRET` and provider credentials like `GITHUB_ID`/`GITHUB_SECRET`
-- `NEXT_PUBLIC_HOST` – hostname used when rendering on the server
-- `API_BASE_URL` - base URL for server-side API requests
+Copy `.env.example` to `.env` and update the values as needed. A description of
+each variable is available in [docs/ENVIRONMENT.md](docs/ENVIRONMENT.md).
 
 ## NextAuth
 
