@@ -14,7 +14,8 @@
     "preview": "next preview",
     "test": "jest --runInBand",
     "sitemap": "next-sitemap",
-    "test:watch": "jest --watch"
+    "test:watch": "jest --watch",
+    "format": "prettier --write ."
   },
   "dependencies": {
     "@tanstack/react-query": "^5.80.6",
@@ -67,6 +68,7 @@
     "jest-environment-jsdom": "^30.0.0-beta.3",
     "next-sitemap": "^4.2.3",
     "ts-jest": "^29.3.4",
-    "typescript": "^5.8.3"
+    "typescript": "^5.8.3",
+    "prettier": "^3.2.5"
   }
 }

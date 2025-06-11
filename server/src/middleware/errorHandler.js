@@ -1,19 +1,15 @@
 const errorHandler = (err, req, res, next) => {
-	console.error(err.stack)
-	console.error('Error', err)
-	if (res.headersSent) {
-		return next(err)
-	}
+  console.error(err.stack)
 
-	if (err.name === 'ValidationError') {
-		return res.status(400).json({ error: err.message })
-	}
-	res.status(500).json({
-		error: 'An unexpected error occurred. Please try again later.',
-	})
-	res.status(500).json({
-		error: err.message || 'Internal Server Error',
-	})
+  if (res.headersSent) {
+    return next(err)
+  }
+
+  const statusCode = err.name === 'ValidationError' ? 400 : err.status || 500
+  const message = err.message ||
+    (statusCode === 400 ? 'Validation error' : 'Internal Server Error')
+
+  res.status(statusCode).json({ error: message })
 }
 
 export default errorHandler
