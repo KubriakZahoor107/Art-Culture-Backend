@@ -1,5 +1,4 @@
-import { PrismaClient } from "@prisma/client"
-const prisma = new PrismaClient()
+import prisma from "../../prismaClient.js"
 
 function getLikeField(entityType) {
   switch (entityType) {

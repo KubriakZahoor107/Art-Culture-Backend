@@ -77,7 +77,7 @@ export const getMuseumsByLanguage = async (req, res, next) => {
   try {
     const museums = await prisma.user.findMany({
       where: {
-        role: "MUSEUMS",
+        role: "MUSEUM",
         ...(letter && {
           [titleField]: {
             startsWith: letter,

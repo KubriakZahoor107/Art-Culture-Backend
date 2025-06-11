@@ -1,12 +1,10 @@
-import { PrismaClient } from "@prisma/client"
+import prisma from "../../prismaClient.js"
 import { validationResult } from "express-validator"
 import fs from "fs"
 import multer from "multer"
 import path, { dirname } from "path"
 import { fileURLToPath } from "url"
 import logger from "../utils/logging.js"
-
-const prisma = new PrismaClient()
 
 //* Derive __filename and __dirname
 const __filename = fileURLToPath(import.meta.url)
@@ -45,7 +43,7 @@ const fileFilter = (req, file, cb) => {
 export const upload = multer({
   storage: storage,
   fileFilter: fileFilter,
-  limits: { fileSize: 5 * 1080 * 1920 }, // 5 MB
+  limits: { fileSize: 5 * 1024 * 1024 }, // 5 MB
 })
 
 export const createPost = async (req, res, next) => {

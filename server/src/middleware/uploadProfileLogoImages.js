@@ -35,7 +35,7 @@ const fileFilter = (req, file, cb) => {
 const upload = multer({
   storage,
   fileFilter,
-  limits: { fileSize: 50 * 1080 * 1920 }, // 20 MB limit
+  limits: { fileSize: 20 * 1024 * 1024 }, // 20 MB limit
 })
 
 const processImages = async (req, res, next) => {
