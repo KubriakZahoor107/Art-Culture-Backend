@@ -1,14 +1,10 @@
 # залежності та артефакти збірки
 node_modules/
-.next/
 
 # локальні змінні оточення
 .env.local
 .env
 
-# великі папки з бінарними файлами
-public/Img/
-src/customFonts/
 # macOS
 .DS_Store
 
@@ -20,8 +16,4 @@ package-lock 2.json
 node_modules 2/
 
 # IDE та тестові артефакти
-__mocks__/
-jest.setup.js
-fix-eslint.sh
-LICENSE 2
 server/uploads/
