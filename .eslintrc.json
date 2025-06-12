@@ -4,8 +4,7 @@
   "parserOptions": {
     "ecmaVersion": 2023,
     "sourceType": "module",
-    "ecmaFeatures": { "jsx": true },
-    "project": ["./tsconfig.json"]
+    "ecmaFeatures": { "jsx": true }
   },
   "plugins": [
     "react",
