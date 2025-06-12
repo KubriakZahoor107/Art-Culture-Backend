@@ -1,14 +1,3 @@
-# залежності та артефакти збірки
-node_modules/
-
-# локальні змінні оточення
-.env.local
+node_modules
+# Keep environment variables out of version control
 .env
-
-# macOS
-.DS_Store
-
-# Резервні/бекап-файли
-*.bak
-# IDE та тестові артефакти
-server/uploads/
