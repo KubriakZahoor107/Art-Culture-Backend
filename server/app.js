@@ -85,13 +85,6 @@ if (process.env.NODE_ENV === "production") {
   })
 }
 
-app.use("/uploads", express.static(path.join(__dirname, "uploads")))
-// server.js or index.js
-
-app.use(
-  "/uploads/profileImages",
-  express.static(path.join(__dirname, "uploads/profileImages")),
-)
 
 // API Routes
 app.use("/api/auth", authRoutes)

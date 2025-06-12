@@ -16,15 +16,6 @@ const PORT = process.env.PORT || 5000 // Use a port that doesn't conflict with y
 
 // Prisma client is initialized in prismaClient.js and imported here
 
-// Serve static files from the React app's build directory (if applicable)
-app.use(express.static(path.join(__dirname, '../dist')))
-
-// Handle React routing, return all requests to React app
-app.get('*', (req, res) => {
-	res.sendFile(path.join(__dirname, '../dist', 'index.html'))
-})
-
-app.use('/uploads', express.static(path.join(__dirname, './uploads')))
 
 // Start the server and connect to the database
 async function startServer() {
