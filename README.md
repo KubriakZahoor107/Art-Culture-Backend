@@ -1,6 +1,7 @@
 # Art & Culture Backend
 
 This repository contains an Express API server that uses Prisma for database access. The codebase targets **Node.js 18**.
+Portions of the backend are gradually being migrated to **TypeScript** for improved type safety.
 
 ## Setup
 
@@ -36,6 +37,12 @@ Both commands require the dependencies to be installed locally.
 ## File Uploads
 
 Uploaded files are stored under `server/uploads/` which is ignored by Git.
+
+## Logging
+
+The backend uses **Winston** for centralized logging. Errors are captured by a
+dedicated middleware that returns a consistent JSON structure and writes details
+to the logger.
 
 ## Environment
 
