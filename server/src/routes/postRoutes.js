@@ -52,7 +52,7 @@ router.get("/exhibitions/:id", getPostByExhibitionId)
 
 router.get("/museums", getMuseumsPost)
 
-router.get("/museum/:authorId", getPostsByAuthorId)
+router.get("/museum/by-author/:authorId", getPostsByAuthorId)
 
 router.get("/museum/:museumId", getPostByMuseumId)
 
