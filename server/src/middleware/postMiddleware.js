@@ -2,9 +2,8 @@
 
 // Example: Logging middleware for post actions
 export const logPostActions = (req, res, next) => {
-		`[${new Date().toISOString()}] ${req.method} ${req.originalUrl} by User ID: ${req.user.id}`
-	)
-	next()
+  // Log post actions if needed; replace with a proper logger in production
+  next()
 }
 
 // Export other middlewares as needed
