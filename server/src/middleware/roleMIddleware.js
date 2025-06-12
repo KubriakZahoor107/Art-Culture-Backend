@@ -8,8 +8,6 @@ const role = (...roles) => {
 		const userRole = req.user.role.trim().toLowerCase()
 		const allowedRoles = roles.map(r => r.toLowerCase())
 
-		console.log('role middleware - req.user.role:', userRole)
-		console.log('Allowed roles:', allowedRoles)
 
 		if (allowedRoles.length && !allowedRoles.includes(userRole)) {
 			console.error(`User role "${userRole}" is not allowed`)

@@ -17,14 +17,15 @@ Portions of the backend are gradually being migrated to **TypeScript** for impro
    npx --prefix server prisma generate
    npx --prefix server prisma migrate deploy
    ```
-4. Start the development server:
+4. A baseline `tsconfig.json` resides in the `server` folder to assist editors and future TypeScript migration.
+5. Start the development server:
    ```bash
    npm run dev --prefix server
    ```
 
 ## Tests and Linting
 
-Dev dependencies such as Jest and ESLint are installed with `npm install` in the `server` directory. Tests live under `server/tests` and must be executed from that folder.
+Dev dependencies such as Jest and ESLint are installed with `npm install` in the `server` directory. ESLint 9 uses the flat configuration in `eslint.config.js`. Tests live under `server/tests` and must be executed from that folder.
 
 ```bash
 npm run lint --prefix server

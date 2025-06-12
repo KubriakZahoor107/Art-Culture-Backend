@@ -99,9 +99,7 @@ app.use("/api/search", searchRoutes)
 app.use("/api/geo", geoRoutes)
 app.use("/api/like", likeRoutes)
 
-// Route debugging
-console.log("Environment", process.env.NODE_ENV)
-console.log("Client URL", process.env.CLIENT_URL)
+// Route debugging removed for production stability
 
 // Error Handling Middleware
 app.use(errorHandler)

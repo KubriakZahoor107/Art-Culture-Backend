@@ -11,9 +11,7 @@ node_modules/
 # Резервні/бекап-файли
 *.bak
 
-# Дублікати lock-файлів та модулів
-package-lock 2.json
-node_modules 2/
+# Дублікати lock-файлів та модулів (очищено)
 
 # IDE та тестові артефакти
 server/uploads/

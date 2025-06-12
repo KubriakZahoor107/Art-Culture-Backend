@@ -29,7 +29,6 @@ export const createProduct = async (req, res, next) => {
     } = req.body
     const userId = req.user.id
 
-    console.log("reg.user", req.user)
 
     const images = req.files.map((file) => ({
       imageUrl: `../../uploads/productImages/${file.filename}`,
@@ -157,7 +156,6 @@ export const getUserProducts = async (req, res, next) => {
   try {
     const userId = req.user.id
 
-    console.log("getUserProducts - req.user:", req.user)
 
     const products = await prisma.product.findMany({
       where: {
@@ -459,7 +457,6 @@ export const getProductByExhibitionId = async (req, res, next) => {
         },
       },
     })
-    console.log("Exhibition and products data:", exhibition)
     if (!exhibition) {
       return res.status(404).json({ error: "Exhibition not found" })
     }

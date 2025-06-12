@@ -8,7 +8,6 @@ const __filename = fileURLToPath(import.meta.url)
 const __dirname = dirname(__filename)
 export const createExhibitions = async (req, res, next) => {
   try {
-    console.log("Entering createExhibitions controller")
 
     const {
       title_en,
@@ -70,9 +69,6 @@ export const createExhibitions = async (req, res, next) => {
 
     const userId = req.user.id
 
-    console.log("Request Body:", req.body)
-    console.log("Uploaded Files:", req.files)
-    console.log("Received artistIds:", artistIds) // For debugging
 
     const images = req.files.map((file) => ({
       imageUrl: `../../uploads/exhibitionsImages/${file.filename}`,
@@ -278,8 +274,6 @@ export const updateExhibition = async (req, res, next) => {
     const userId = req.user.id
 
     // Log received data
-    console.log("Received artistIds:", artistIds)
-    console.log("Type of artistIds:", typeof artistIds)
     // Verify ownership
     const exhibition = await prisma.exhibition.findUnique({
       where: { id: parseInt(id) },
