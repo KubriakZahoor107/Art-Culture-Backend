@@ -15,11 +15,10 @@ jobs:
         with:
           node-version: 18
       - name: Install dependencies
-        run: npm install --legacy-peer-deps
-        working-directory: server
+        run: |
+          cd server
+          npm install --legacy-peer-deps
       - name: Lint
-        run: npm run lint || true
-        working-directory: server
+        run: npm --prefix server run lint
       - name: Test
-        run: npm test || true
-        working-directory: server
+        run: npm --prefix server test
