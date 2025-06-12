@@ -7,10 +7,9 @@ Portions of the backend are gradually being migrated to **TypeScript** for impro
 
 1. Install dependencies:
    ```bash
-   cd server
-   npm install
+   npm install --prefix server
    # if you encounter peer dependency warnings
-   npm install --legacy-peer-deps
+   npm install --legacy-peer-deps --prefix server
    ```
 2. Create a `.env` file in the `server` folder based on `server/.env.sample` and set all required environment variables.
 3. Generate the Prisma client and apply migrations if needed:
@@ -20,16 +19,17 @@ Portions of the backend are gradually being migrated to **TypeScript** for impro
    ```
 4. Start the development server:
    ```bash
-   npm run dev
+   npm run dev --prefix server
    ```
 
 ## Tests and Linting
 
-Dev dependencies such as Jest and ESLint are installed with `npm install` in the `server` directory. Run the following commands from `server`:
+Dev dependencies such as Jest and ESLint are installed with `npm install --prefix server`.
+Run the following commands from the repository root:
 
 ```bash
-npm run lint
-npm test
+npm run lint --prefix server
+npm test --prefix server
 ```
 
 Both commands require the dependencies to be installed locally.
