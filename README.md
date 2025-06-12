@@ -23,6 +23,12 @@ Portions of the backend are gradually being migrated to **TypeScript** for impro
    npm run dev --prefix server
    ```
 
+6. Run the server in production:
+   ```bash
+   npm start --prefix server
+   ```
+
+
 ## Tests and Linting
 
 Dev dependencies such as Jest and ESLint are installed with `npm install` in the `server` directory. ESLint 9 uses the flat configuration in `eslint.config.js`. Tests live under `server/tests` and must be executed from that folder.
