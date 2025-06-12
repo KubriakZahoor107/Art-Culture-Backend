@@ -71,9 +71,6 @@ app.use(limiter)
 // HTTP request logger
 app.use(morgan("combined"))
 
-// Middleware to parse JSON
-app.use(express.json())
-
 // Enforce HTTPS
 if (process.env.NODE_ENV === "production") {
   app.use((req, res, next) => {
@@ -99,9 +96,7 @@ app.use("/api/search", searchRoutes)
 app.use("/api/geo", geoRoutes)
 app.use("/api/like", likeRoutes)
 
-// Route debugging
-console.log("Environment", process.env.NODE_ENV)
-console.log("Client URL", process.env.CLIENT_URL)
+// Route debugging removed for production stability
 
 // Error Handling Middleware
 app.use(errorHandler)

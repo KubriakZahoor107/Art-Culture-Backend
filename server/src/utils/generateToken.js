@@ -1,8 +1,7 @@
 import jwt from 'jsonwebtoken'
 
 const generateToken = user => {
-	console.log('Generating token for user:', user) // Debugging line
-	if (!user.id) {
+        if (!user.id) {
 		throw new Error('User ID is missing during token generation')
 	}
 	const payload = {
