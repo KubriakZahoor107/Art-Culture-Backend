@@ -14,6 +14,7 @@ jobs:
       - uses: actions/setup-node@v4
         with:
           node-version: 18
+      # Run all npm commands in the server directory
       - name: Install dependencies
         working-directory: server
         run: npm install --legacy-peer-deps
