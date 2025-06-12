@@ -71,9 +71,6 @@ app.use(limiter)
 // HTTP request logger
 app.use(morgan("combined"))
 
-// Middleware to parse JSON
-app.use(express.json())
-
 // Enforce HTTPS
 if (process.env.NODE_ENV === "production") {
   app.use((req, res, next) => {
