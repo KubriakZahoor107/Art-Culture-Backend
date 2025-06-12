@@ -6,7 +6,6 @@ module.exports = {
     ecmaVersion: 2022,
     sourceType: 'module',
     ecmaFeatures: { jsx: true },
-    project: ['./tsconfig.json'],
   },
   plugins: [
     '@typescript-eslint',
@@ -30,7 +29,6 @@ module.exports = {
     react: { version: 'detect' },
     'import/resolver': {
       node: { extensions: ['.js', '.jsx', '.ts', '.tsx'] },
-      typescript: { project: './tsconfig.json' },
     },
   },
   rules: {
