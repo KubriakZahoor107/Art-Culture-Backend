@@ -17,7 +17,8 @@ Portions of the backend are gradually being migrated to **TypeScript** for impro
    npx --prefix server prisma generate
    npx --prefix server prisma migrate deploy
    ```
-4. Start the development server:
+4. The TypeScript configuration used by the API lives in `server/tsconfig.json`.
+5. Start the development server:
    ```bash
    npm run dev --prefix server
    ```
