@@ -57,7 +57,7 @@ authRoute.get(
   '/me',
   // authenticateToken,
   // validateRequest(getCurrentUserValidator),
-  authController.getCurrentUser,
+  authController.getMe,
 )
 
 // Update User Profile

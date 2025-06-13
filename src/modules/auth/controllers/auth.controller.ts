@@ -4,7 +4,7 @@ import loginUseCase from '../use-cases/login.use-case'
 import registerUseCase from '../use-cases/register.use-case'
 import resetPasswordUseCase from '../use-cases/reset-password.use-case'
 import resetPasswordConfirmUseCase from '../use-cases/reset-password-confirm.use-case'
-import getCurrentUserUseCase from '../use-cases/get-current-user.use-case'
+import getMeUseCase from '../use-cases/get-me.use-case'
 import updateUserProfileUseCase from '../use-cases/update-user-profile.use-case'
 import registerUserUseCase from '../use-cases/register-user.use-case'
 
@@ -49,8 +49,8 @@ const authController = {
       .json(result.data)
   },
 
-  async getCurrentUser(req: Request, res: Response) {
-    const result = await getCurrentUserUseCase.execute({
+  async getMe(req: Request, res: Response) {
+    const result = await getMeUseCase.execute({
       userId: req.user.id,
     })
     

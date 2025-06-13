@@ -8,6 +8,7 @@ import * as path from 'node:path'
 import * as url from 'node:url'
 
 import authRoute from './modules/auth/routes/auth.route.js'
+import errorHandler from './shared/middlewares/error-handler.middleware.js'
 
 dotenv.config()
 
@@ -96,6 +97,6 @@ app.use('/api/auth', authRoute)
 // app.use('/api/geo', geoRoutes)
 // app.use('/api/like', likeRoutes)
 
-// app.use(errorHandler)
+app.use(errorHandler)
 
 export default app

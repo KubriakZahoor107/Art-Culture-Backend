@@ -8,14 +8,13 @@ import LoginInput from '../types/interfaces/service-inputs/login.input'
 import RegisterUserInput from '../types/interfaces/service-inputs/register-user.input'
 import LoginOutput from '../types/interfaces/service-outputs/login.output'
 import RegisterOutput from '../types/interfaces/service-outputs/register.output'
-import GetCurrentUserOutput from '../types/interfaces/service-outputs/get-current-user.output'
 import UpdateUserProfileOutput from '../types/interfaces/service-outputs/update-user-profile.output'
-import GetCurrentUserInput from '../types/interfaces/service-inputs/get-current-user.input'
 import UpdateUserProfileInput from '../types/interfaces/service-inputs/update-user-profile.input'
 import getObjectWithoutKeys from '../../../shared/utils/get-object-without-keys'
 import ResetPasswordInput from '../types/interfaces/service-inputs/reset-password.input'
 import sendEmail from '../../../shared/utils/sendEmails'
 import generateToken from '../../../shared/utils/generateToken'
+import GetMeOutput from '../types/interfaces/service-outputs/get-me.output'
 
 const authService = {
   async register(input: RegisterUserInput): Promise<RegisterOutput> {
@@ -62,8 +61,6 @@ const authService = {
 
     return {
       token,
-      user: getObjectWithoutKeys(user, ['password']),
-      message: 'User created successfully',
     }
   },
 
@@ -90,8 +87,6 @@ const authService = {
 
     return {
       token,
-      user: getObjectWithoutKeys(user, ['password']),
-      message: 'User created successfully',
     }
   },
 
@@ -99,7 +94,9 @@ const authService = {
     const { email, password } = input
 
     const user = await appPrismaClient.user.findUnique({
-      where: { email },
+      where: {
+        email,
+      },
     })
 
     if (!user) {
@@ -116,7 +113,6 @@ const authService = {
 
     return {
       token,
-      user: getObjectWithoutKeys(user, ['password']),
     }
   },
 
@@ -165,34 +161,14 @@ const authService = {
     })
   },
 
-  async getCurrentUser(input: GetCurrentUserInput): Promise<GetCurrentUserOutput> {
-    const { userId } = input
-
+  async getMe(userId: number): Promise<GetMeOutput> {
     const user = await appPrismaClient.user.findUnique({
       where: {
         id: userId,
       },
-      select: {
-        id: true,
-        email: true,
-        role: true,
-        title: true,
-        bio: true,
-        country: true,
-        city: true,
-        street: true,
-        house_number: true,
-        postcode: true,
-        lat: true,
-        lon: true,
-      },
     })
 
-    if (!user) {
-      throw new Error('User not found')
-    }
-
-    return { user }
+    return user
   },
 
   async updateUserProfile(input: UpdateUserProfileInput): Promise<UpdateUserProfileOutput> {
