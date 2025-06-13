@@ -25,14 +25,15 @@ Portions of the backend are gradually being migrated to **TypeScript** for impro
 
 ## Tests and Linting
 
-Dev dependencies such as Jest and ESLint are installed with `npm install` in the `server` directory. Run the following commands from `server`:
+Dev dependencies such as Jest and ESLint are installed with `npm install` in the `server` directory. Run the following commands from **inside** the `server` folder:
 
 ```bash
+cd server
 npm run lint
 npm test
 ```
 
-Both commands require the dependencies to be installed locally.
+The `test` script executes `jest --runInBand`, so your tests are run sequentially. Both commands require the dependencies to be installed locally.
 
 ## File Uploads
 
