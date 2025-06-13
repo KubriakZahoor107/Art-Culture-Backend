@@ -283,7 +283,7 @@ export const getPostByExhibitionId = async (req, res, next) => {
           },
         },
       },
-      orderedBy: {
+      orderBy: {
         createdAt: "desc",
       },
     })
@@ -349,7 +349,7 @@ export const getPostByMuseumId = async (req, res, next) => {
           },
         },
       },
-      orderedBy: {
+      orderBy: {
         createdAt: "desc",
       },
     })
