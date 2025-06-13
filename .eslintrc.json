@@ -22,9 +22,7 @@
     "plugin:jsx-a11y/recommended",
     "plugin:import/errors",
     "plugin:import/warnings",
-    "plugin:import/typescript",
-    "next",
-    "next/core-web-vitals"
+    "plugin:import/typescript"
   ],
   "settings": {
     "react": { "version": "detect" },
@@ -38,5 +36,5 @@
     "react-hooks/exhaustive-deps": "warn",
     "no-unused-vars": ["warn", { "argsIgnorePattern": "^_" }]
   },
-  "ignorePatterns": [".next/", "node_modules/", "public/"]
+  "ignorePatterns": ["node_modules/", "public/"]
 }

@@ -46,9 +46,9 @@ router.get("/author/:authorId", getPostsByAuthorId)
 
 router.get("/exhibitions", getExhibitionsPost)
 
-router.get("/exhibition/:authorId", getPostsByAuthorId)
+router.get("/exhibitions/by-author/:authorId", getPostsByAuthorId)
 
-router.get("/exhibition/:exhibitionId", getPostByExhibitionId)
+router.get("/exhibitions/:id", getPostByExhibitionId)
 
 router.get("/museums", getMuseumsPost)
 
@@ -61,7 +61,6 @@ router.get("/", getAllPosts)
 
 // Get a single post by ID
 router.get("/:id", getPostById)
-router.get("/posts/:id", getPostById)
 
 // Update a post
 router.put(

@@ -1,9 +1,9 @@
 # залежності та артефакти збірки
 node_modules/
-.next/
 
 # локальні змінні оточення
 .env.local
+.env
 
 # великі папки з бінарними файлами
 public/Img/
@@ -23,3 +23,4 @@ __mocks__/
 jest.setup.js
 fix-eslint.sh
 LICENSE 2
+server/uploads/

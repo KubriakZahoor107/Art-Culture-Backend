@@ -1,9 +1,8 @@
-import { PrismaClient } from "@prisma/client"
+import prisma from "../../prismaClient.js"
 import { validationResult } from "express-validator"
 import fs from "fs"
 import path, { dirname } from "path"
 import { fileURLToPath } from "url"
-const prisma = new PrismaClient()
 
 const __filename = fileURLToPath(import.meta.url)
 const __dirname = dirname(__filename)
