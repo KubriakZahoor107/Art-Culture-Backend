@@ -14,18 +14,26 @@ const errorHandler = (
 	}
 
 	if (err instanceof z.ZodError) {
+    const {
+      message,
+      path,
+    } = err.issues[0]
+    const formattedMessage = `${path.join('.')}: ${message}`
+
 		res
       .status(400)
       .json({
-        message: err.message,
+        message: formattedMessage,
       })
 
     return
 	}
 
-	res.status(500).json({
-		error: err.message || 'Internal Server Error',
-	})
+	res
+    .status(500)
+    .json({
+      error: err.message || 'Internal Server Error',
+    })
 }
 
 export default errorHandler

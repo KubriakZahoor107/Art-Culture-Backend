@@ -1,5 +1,7 @@
-import { loginSchema } from '../validation-schemas/login/login.json-validation-schema'
+import { loginJsonValidationSchema } from '../validation-schemas/login/login.json-validation-schema'
 
-export const loginValidator = {
-  jsonSchema: loginSchema,
+const loginValidator = {
+  jsonSchema: loginJsonValidationSchema,
 }
+
+export default loginValidator

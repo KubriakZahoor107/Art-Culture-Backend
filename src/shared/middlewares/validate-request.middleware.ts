@@ -13,17 +13,28 @@ const validateRequest = (validationsCollection: ValidationsCollection) => async 
 ) => {
   const {
     jsonSchema,
+    filesSchema,
     headerSchema,
     querySchema,
     paramSchema,
   } = validationsCollection
-    
+
   if (jsonSchema) {
     await validateRequestPart(
       {
         req,
         part: 'json',
         schema: jsonSchema,
+      },
+    )
+  }
+
+  if (filesSchema) {
+    await validateRequestPart(
+      {
+        req,
+        part: 'files',
+        schema: filesSchema,
       },
     )
   }

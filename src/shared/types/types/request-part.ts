@@ -1,3 +1,3 @@
-type RequestPart = 'json' | 'formData' | 'param' | 'query' | 'header'
+type RequestPart = 'json' | 'files' | 'param' | 'query' | 'header'
 
 export default RequestPart

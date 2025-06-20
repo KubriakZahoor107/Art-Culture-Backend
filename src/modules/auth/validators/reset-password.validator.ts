@@ -1,5 +1,7 @@
-import { resetPasswordSchema } from '../validation-schemas/reset-password/reset-password.json-validation-schema'
+import resetPasswordJsonValidationSchema from '../validation-schemas/reset-password/reset-password.json-validation-schema'
 
-export const resetPasswordValidator = {
-  jsonSchema: resetPasswordSchema,
+const resetPasswordValidator = {
+  jsonSchema: resetPasswordJsonValidationSchema,
 }
+
+export default resetPasswordValidator

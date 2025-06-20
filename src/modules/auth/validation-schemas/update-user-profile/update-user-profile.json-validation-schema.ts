@@ -1,6 +1,6 @@
 import { z } from 'zod'
 
-export const updateUserProfileSchema = z.object({
+const updateUserProfileJsonValidationSchema = z.object({
   userId: z.number().int('User ID must be an integer'),
   data: z.object({
     title: z.string().optional(),
@@ -17,4 +17,5 @@ export const updateUserProfileSchema = z.object({
   }),
 })
 
-export type UpdateUserProfileInput = z.infer<typeof updateUserProfileSchema>
+export type UpdateUserProfileInput = z.infer<typeof updateUserProfileJsonValidationSchema>
+export default updateUserProfileJsonValidationSchema

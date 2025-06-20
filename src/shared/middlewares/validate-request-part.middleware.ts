@@ -8,10 +8,15 @@ const validateRequestPart = async (options: ValidateRequestPartOptions) => {
     part,
     schema,
   } = options
-  
+  console.log(req.files)
   switch (part) {
     case 'json':
       data = req.body
+
+      break
+  
+    case 'files':
+      data = req.files
 
       break
   
@@ -20,7 +25,6 @@ const validateRequestPart = async (options: ValidateRequestPartOptions) => {
   }
 
   schema.parse(data)
-
 }
 
 export default validateRequestPart
