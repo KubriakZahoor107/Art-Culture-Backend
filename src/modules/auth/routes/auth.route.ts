@@ -34,10 +34,10 @@ authRoute.post(
 )
 
 authRoute.post(
-  '/reset-password/:token',
+  '/reset-password',
   ...wrap([
-    validateRequest(authValidators.resetPasswordConfirm),
-    authController.resetPasswordConfirm,
+    validateRequest(authValidators.resetPassword),
+    authController.resetPassword,
   ]),
 )
 

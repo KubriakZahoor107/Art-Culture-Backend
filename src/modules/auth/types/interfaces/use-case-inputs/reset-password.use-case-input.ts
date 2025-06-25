@@ -1,5 +1,6 @@
 interface ResetPasswordUseCaseInput {
-  email: string,
+  token: string,
+  newPassword: string,
 }
 
 export default ResetPasswordUseCaseInput

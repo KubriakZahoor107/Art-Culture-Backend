@@ -2,7 +2,7 @@ import bcrypt from 'bcrypt'
 import jwt from 'jsonwebtoken'
 import { Prisma, User } from '@prisma/client'
 
-import ResetPasswordConfirmInput from '../types/interfaces/service-inputs/reset-password-confirm.input'
+import ResetPasswordInput from '../types/interfaces/service-inputs/reset-password.input'
 import appPrismaClient from '../../../data/app-prisma-client'
 import LoginInput from '../types/interfaces/service-inputs/login.input'
 import RegisterUserInput from '../types/interfaces/service-inputs/register-user.input'
@@ -137,21 +137,28 @@ const authService = {
     })
   },
 
-  async resetPasswordConfirm(input: ResetPasswordConfirmInput): Promise<void> {
-    const { userId, token, newPassword } = input
+  async resetPassword(input: ResetPasswordInput): Promise<void> {
+    const { token, newPassword } = input
 
+    let decoded: any
     try {
-      jwt.verify(token, process.env.JWT_SECRET)
+      decoded = jwt.verify(token, process.env.JWT_SECRET)
     }
     
     catch (error) {
       throw new Error('Invalid or expired token')
     }
 
+    if (!decoded || !decoded.id) {
+      throw new Error('Invalid or expired token')
+    }
+
     const hashedPassword = await bcrypt.hash(newPassword, 10)
 
     await appPrismaClient.user.update({
-      where: { id: userId },
+      where: {
+        id: decoded.id,
+      },
       data: {
         password: hashedPassword,
         resetToken: null,
