@@ -2,7 +2,7 @@ import getCurrentUserValidator from './get-current-user.validator'
 import loginValidator from './login.validator'
 import registerValidator from './register.validator'
 import resetPasswordConfirmValidator from './reset-password-confirm.validator'
-import resetPasswordValidator from './reset-password.validator'
+import forgotPasswordValidator from './forgot-password.validator'
 import updateUserProfileValidator from './update-user-profile.validator'
 
 const authValidators = {
@@ -12,7 +12,7 @@ const authValidators = {
   getCurrentUser: getCurrentUserValidator,
   // sendRecoveryCode: sendRecoveryCodeValidator,
   // verifyRecoveryCode: verifyRecoveryCodeValidator,
-  resetPassword: resetPasswordValidator,
+  forgotPassword: forgotPasswordValidator,
   updateUserProfile: updateUserProfileValidator,
 }
 

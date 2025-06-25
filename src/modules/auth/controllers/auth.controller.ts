@@ -2,23 +2,14 @@ import { Request, Response } from 'express'
 
 import loginUseCase from '../use-cases/login.use-case'
 import registerUseCase from '../use-cases/register.use-case'
-import resetPasswordUseCase from '../use-cases/reset-password.use-case'
+import forgotPasswordUseCase from '../use-cases/forgot-password.use-case'
 import resetPasswordConfirmUseCase from '../use-cases/reset-password-confirm.use-case'
 import getMeUseCase from '../use-cases/get-me.use-case'
 import updateUserProfileUseCase from '../use-cases/update-user-profile.use-case'
-import registerUserUseCase from '../use-cases/register-user.use-case'
 
 const authController = {
   async register(req: Request, res: Response) {
     const result = await registerUseCase.execute(req.body)
-
-    res
-      .status(result.metadata.statusCode)
-      .json(result.data)
-  },
-
-  async registerUser(req: Request, res: Response) {
-    const result = await registerUserUseCase.execute(req.body)
 
     res
       .status(result.metadata.statusCode)
@@ -33,8 +24,8 @@ const authController = {
       .json(result.data)
   },
 
-  async resetPassword(req: Request, res: Response) {
-    const result = await resetPasswordUseCase.execute(req.body)
+  async forgotPassword(req: Request, res: Response) {
+    const result = await forgotPasswordUseCase.execute(req.body)
 
     res
       .status(result.metadata.statusCode)

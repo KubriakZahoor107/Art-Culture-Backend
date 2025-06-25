@@ -10,7 +10,7 @@ import LoginOutput from '../types/interfaces/service-outputs/login.output'
 import RegisterOutput from '../types/interfaces/service-outputs/register.output'
 import UpdateUserProfileOutput from '../types/interfaces/service-outputs/update-user-profile.output'
 import UpdateUserProfileInput from '../types/interfaces/service-inputs/update-user-profile.input'
-import ResetPasswordInput from '../types/interfaces/service-inputs/reset-password.input'
+import ForgotPasswordInput from '../types/interfaces/service-inputs/forgot-password.input'
 import sendEmail from '../../../shared/utils/sendEmails'
 import generateToken from '../../../shared/utils/generateToken'
 import GetMeOutput from '../types/interfaces/service-outputs/get-me.output'
@@ -115,7 +115,7 @@ const authService = {
     }
   },
 
-  async resetPassword(input: ResetPasswordInput): Promise<void> {
+  async forgotPassword(input: ForgotPasswordInput): Promise<void> {
     const { email } = input
 
     const user = await appPrismaClient.user.findUnique({ where: { email } })
